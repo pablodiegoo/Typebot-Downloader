@@ -1,0 +1,11 @@
+# Environment Variables
+.env
+
+# Output Directories
+output/
+DB/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
