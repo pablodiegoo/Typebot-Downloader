@@ -2,8 +2,8 @@
 .env
 
 # Output Directories
-output/
-DB/
+output/*
+DB/*
 
 # Python
 __pycache__/
