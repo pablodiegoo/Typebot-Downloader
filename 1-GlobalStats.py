@@ -7,37 +7,15 @@ from dotenv import load_dotenv
 # Carrega variáveis de ambiente
 load_dotenv()
 
-BOT_ID = os.getenv("BOT_ID")
 AUTH_TOKEN = os.getenv("AUTH_TOKEN")
 API_BASE_URL = os.getenv("API_BASE_URL", "https://typebot.io/api/v1")
 OUTPUT_DIR = 'output'
 
-if not BOT_ID or not AUTH_TOKEN:
-    print("Erro: BOT_ID e AUTH_TOKEN devem estar configurados no arquivo .env.")
+if not AUTH_TOKEN:
+    print("Erro: AUTH_TOKEN deve estar configurado no arquivo .env.")
     exit()
 
 # ==============================================================================
-
-def fetch_current_bot_details(bot_id, token):
-    """Busca detalhes do bot atual para descobrir o workspaceId."""
-    url = f"{API_BASE_URL}/typebots/{bot_id}"
-    headers = {"Authorization": f"Bearer {token}"}
-    
-    print(f"Buscando detalhes do bot ID: {bot_id} para encontrar Workspace ID...")
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as e:
-        print(f"Erro ao buscar bot: {e}")
-        if response.status_code == 404:
-            print("Verifique se o BOT_ID está correto.")
-        elif response.status_code == 401:
-            print("Erro de autenticação. Verifique seu AUTH_TOKEN.")
-        return None
-    except Exception as e:
-        print(f"Erro inesperado: {e}")
-        return None
 
 def fetch_workspace_typebots(workspace_id, token):
     """Lista todos os typebots do workspace."""
